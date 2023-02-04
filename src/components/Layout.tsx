@@ -4,8 +4,8 @@ import {
     UserOutlined,
     VideoCameraOutlined
 } from '@ant-design/icons';
-import { Avatar, Badge, Layout, Menu, theme } from 'antd';
-import Array from './Array';
+import { Layout, Menu, theme } from 'antd';
+import MyContent from './Content';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -53,7 +53,7 @@ const MyLayout: React.FC = () => {
                             background: colorBgContainer
                         }}
                     >
-                        <Array data={[54, 87, 98]}></Array>
+                        <MyContent></MyContent>
                     </div>
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>
