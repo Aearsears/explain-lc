@@ -1,26 +1,51 @@
-import { Avatar, Badge } from 'antd';
-import React from 'react';
-import { useAutoAnimate } from '@formkit/auto-animate/react';
+import { Avatar, Badge, Button } from 'antd';
+import { motion } from 'framer-motion';
+import React, { useState } from 'react';
 
 interface AppProps {
     data: number[];
-    ref: React.Ref<HTMLButtonElement>;
 }
 
 const Array: React.FC<AppProps> = ({ data }: AppProps & {}) => {
     const cells = [];
+    const [x, setX] = useState(100);
+    const [y, setY] = useState(0);
+    const [rotate, setRotate] = useState(0);
 
-    const [parent, enableAnimations] = useAutoAnimate(/* optional config */);
+    const swapValues = () => {
+        let x1 = data[0];
+        data[0] = data[1];
+        data[1] = x1;
+        console.log('swapped');
+        setX(-x);
+        setRotate(rotate - 180);
+    };
+
     for (let i = 0; i < data.length; i++) {
         cells.push(
-            <Badge>
-                <Avatar shape="square" size="large">
-                    {data[i]}
-                </Avatar>
-            </Badge>
+            <motion.div
+                className="box"
+                animate={{ x, y, rotate }}
+                transition={{ type: 'just' }}
+                style={{
+                    border: '3px dotted black',
+                    display: 'inline-block'
+                }}
+            >
+                <Badge>
+                    <Avatar shape="square" size="large">
+                        {data[i]}
+                    </Avatar>
+                </Badge>
+            </motion.div>
         );
     }
-    return <ul ref={parent}>{cells}</ul>;
+    return (
+        <div>
+            {cells}
+            <Button onClick={swapValues}>swap</Button>
+        </div>
+    );
 };
 
 export default Array;
