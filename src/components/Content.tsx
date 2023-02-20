@@ -30,7 +30,7 @@ const MyContent: React.FC<AppProps> = ({ data }: AppProps) => {
                 <h3 style={{ color: 'black' }}>spacing</h3>
             </div>
             <Array data={array2}></Array>
-            <Button onClick={swapValues}>swap values</Button>
+            {/* <Button onClick={swapValues}>swap values</Button> */}
 
             <Button
                 onClick={() => {
