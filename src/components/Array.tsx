@@ -1,5 +1,5 @@
 import { Avatar, Badge, Button } from 'antd';
-import { motion, spring } from 'framer-motion';
+import { motion } from 'framer-motion';
 import React from 'react';
 
 interface ArrayProps {
@@ -36,71 +36,23 @@ class Array extends React.Component<ArrayProps, ArrayState> {
         };
     }
 
-    dict: { [id: number]: React.ReactElement } = {};
-
-    componentDidMount() {
-        const cells: React.ReactElement[] = [];
-        for (let i = 0; i < this.props.data.length; i++) {
-            let element = (
-                <Cell
-                    data={this.state.cellProps[i].data}
-                    x={this.state.cellProps[i].x}
-                    y={this.state.cellProps[i].y}
-                    rotation={this.state.cellProps[i].rotation}
-                ></Cell>
-            );
-            this.dict[i] = element;
-            cells.push(element);
-        }
-        this.setState({ ...this.state, cells: cells });
-    }
-
     swapValues = () => {
         let cellProps = [...this.state.cellProps];
-        let cells = [...this.state.cells];
         console.log(cellProps);
 
         //swap first and second elements, 0th and 1st
         let prop1 = cellProps[0];
         let prop2 = cellProps[1];
 
-        let element1 = cells[0];
-        let element2 = cells[1];
-
-        //update the cells props
-        // let temp = element1.data;
-        // element1.data = element2.data;
-        // element2.data = temp;
-
-        //update pos
-        // element1.x = element1.x + 50;
-        // element2.x = element2.x - 50;
-
         cellProps[1] = prop1;
         cellProps[0] = prop2;
 
-        cells[1] = element1;
-        cells[0] = element2;
-
-        this.setState({ cells, cellProps });
+        this.setState({ ...this.state, cellProps });
         console.log('swapped');
         console.log(this.state);
     };
 
     render() {
-        let cells = [];
-        for (let i = 0; i < this.props.data.length; i++) {
-            let cellProp: CellProps = this.state.cellProps[i];
-            let element = (
-                <Cell
-                    data={cellProp.data}
-                    x={cellProp.x}
-                    y={cellProp.y}
-                    rotation={cellProp.rotation}
-                ></Cell>
-            );
-            cells.push(element);
-        }
         return (
             <div>
                 <ul>
@@ -136,7 +88,6 @@ class Cell extends React.Component<CellProps, {}> {
                 }}
                 layout
                 style={{
-                    border: '3px dotted black',
                     display: 'inline-block'
                 }}
             >
@@ -145,7 +96,6 @@ class Cell extends React.Component<CellProps, {}> {
                         {this.props.data}
                     </Avatar>
                 </Badge>
-                test
             </motion.li>
         );
     }
