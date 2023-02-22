@@ -2,6 +2,7 @@ import { Avatar, Badge, Button } from 'antd';
 import { motion } from 'framer-motion';
 import React, { useState } from 'react';
 import Array from './Array';
+import HashMap from './HashMap';
 
 interface AppProps {
     data?: number[];
@@ -23,6 +24,7 @@ const MyContent: React.FC<AppProps> = ({ data }: AppProps) => {
         console.log('swapped');
     };
 
+    const commonProps = { myProp1: 'prop1', myProp2: 'prop2' };
     return (
         <div>
             <Array data={array1}></Array>
@@ -50,6 +52,7 @@ const MyContent: React.FC<AppProps> = ({ data }: AppProps) => {
                     }}
                 />
             </div>
+            <HashMap data={commonProps}></HashMap>
         </div>
     );
 };
